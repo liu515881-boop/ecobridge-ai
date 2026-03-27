@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
@@ -10,8 +12,13 @@ const app = express();
 const PORT = 3000;
 
 // 通义千问 VL API 配置
-const DASHSCOPE_API_KEY = process.env.DASHSCOPE_API_KEY || 'sk-your-api-key-here'; // 请替换为真实 API Key
+const DASHSCOPE_API_KEY = process.env.DASHSCOPE_API_KEY;
 const QWEN_VL_MODEL = 'qwen-vl-max-latest';
+
+if (!DASHSCOPE_API_KEY) {
+  console.error('❌ 错误：未找到 DASHSCOPE_API_KEY，请检查 .env 文件');
+  process.exit(1);
+}
 
 // 中间件
 app.use(cors());
@@ -50,13 +57,15 @@ async function callQwenVL(imagePath) {
   const imageDataUrl = `data:${imageMimeType};base64,${imageBase64}`;
   
   // 构建 prompt，包含金属特征描述
-  const prompt = `请仔细识别这张图片中的金属材料。如果图片里有多种金属，只回答最主要的那个。
+  const prompt = `你是专业的废金属识别专家。请仔细识别图片中的金属材料。
 
 金属特征参考：
 - 铜：红褐色或紫红色，有金属光泽
 - 铝：银白色，轻质，不易生锈
-- 铁：灰黑色或深灰色，容易生锈（红褐色锈迹）
+- 铁：灰黑色或深灰色，容易生锈（黄褐色锈迹）
 - 不锈钢：亮银色，表面光滑，不易生锈
+
+如果图片里有多种金属，只回答最主要的那个。
 
 只输出一个 JSON 对象，不要有其他文字：
 {
@@ -67,30 +76,36 @@ async function callQwenVL(imagePath) {
 }`;
 
   try {
+    const requestBody = {
+      model: QWEN_VL_MODEL,
+      messages: [
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'image_url',
+              image_url: {
+                url: imageDataUrl
+              }
+            },
+            {
+              type: 'text',
+              text: prompt
+            }
+          ]
+        }
+      ],
+      max_tokens: 500,
+      temperature: 0.1
+    };
+
+    console.log('📤 发送请求到通义千问 VL API...');
+    console.log('请求模型:', QWEN_VL_MODEL);
+    console.log('请求体:', JSON.stringify(requestBody, null, 2).substring(0, 500) + '...');
+    
     const response = await axios.post(
       'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
-      {
-        model: QWEN_VL_MODEL,
-        messages: [
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'image_url',
-                image_url: {
-                  url: imageDataUrl
-                }
-              },
-              {
-                type: 'text',
-                text: prompt
-              }
-            ]
-          }
-        ],
-        max_tokens: 500,
-        temperature: 0.1
-      },
+      requestBody,
       {
         headers: {
           'Authorization': `Bearer ${DASHSCOPE_API_KEY}`,
@@ -100,7 +115,9 @@ async function callQwenVL(imagePath) {
     );
 
     const content = response.data.choices[0].message.content;
-    console.log('通义千问返回原始内容:', content);
+    console.log('📥 通义千问返回原始内容:');
+    console.log(content);
+    console.log('完整响应:', JSON.stringify(response.data, null, 2));
     
     // 解析 JSON 响应
     let result;
