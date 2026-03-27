@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecobridge AI - 废旧金属识别</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>♻️ Ecobridge AI</h1>
+            <p class="subtitle">废旧金属智能识别平台</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="upload-section">
+            <h2>上传图片</h2>
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="imageInput" accept="image/*" hidden>
+                <div class="upload-placeholder" id="uploadPlaceholder">
+                    <div class="upload-icon">📷</div>
+                    <p>点击或拖拽上传图片</p>
+                    <p class="hint">支持 JPG、PNG 格式，最大 10MB</p>
+                </div>
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <img id="previewImg" src="" alt="预览">
+                    <button class="remove-btn" id="removeBtn" type="button">✕</button>
+                </div>
+            </div>
+            <button class="identify-btn" id="identifyBtn" disabled>
+                🔍 开始识别
+            </button>
+        </section>
+
+        <section class="result-section" id="resultSection" style="display: none;">
+            <h2>识别结果</h2>
+            <div class="result-card">
+                <div class="result-header">
+                    <span class="metal-type" id="metalType">--</span>
+                    <span class="confidence" id="confidence">--</span>
+                </div>
+                <div class="result-body">
+                    <div class="info-row">
+                        <span class="label">英文名称：</span>
+                        <span id="metalTypeEn">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">置信度：</span>
+                        <span id="confidenceValue">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">杂质检测：</span>
+                        <span id="impurities">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">识别时间：</span>
+                        <span id="timestamp">--</span>
+                    </div>
+                </div>
+            </div>
+            <button class="reset-btn" id="resetBtn" type="button">
+                🔄 重新识别
+            </button>
+        </section>
+
+        <section class="loading-section" id="loadingSection" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>正在识别中，请稍候...</p>
+        </section>
+
+        <section class="error-section" id="errorSection" style="display: none;">
+            <div class="error-message">
+                <span class="error-icon">⚠️</span>
+                <p id="errorMessage">识别失败，请重试</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ecobridge AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
