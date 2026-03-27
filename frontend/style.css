@@ -1,3 +1,29 @@
+/* ===================================
+   Ecobridge AI - B2B 金属交易平台风格
+   =================================== */
+
+/* CSS 变量 */
+:root {
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-secondary: #64748b;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-text: #1e293b;
+    --color-text-muted: #64748b;
+    --color-border: #e2e8f0;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    --radius: 12px;
+    --radius-lg: 16px;
+}
+
+/* 基础重置 */
 * {
     margin: 0;
     padding: 0;
@@ -5,88 +31,145 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--color-text);
+    background-color: var(--color-bg);
     min-height: 100vh;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1024px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header */
-header {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* ===================================
+   顶部导航
+   =================================== */
+.header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
 }
 
-header h1 {
-    font-size: 2.5rem;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 0.5rem;
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #666;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+.nav {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-link {
+    padding: 8px 16px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.nav-link.active {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+/* ===================================
+   主内容区
+   =================================== */
+.main {
+    padding: 40px 0;
+    min-height: calc(100vh - 200px);
+}
+
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: var(--color-text-muted);
     font-size: 1.1rem;
 }
 
-/* Main */
-main {
-    padding: 3rem 0;
-}
-
-/* Upload Section */
+/* ===================================
+   上传区域
+   =================================== */
 .upload-section {
-    background: #fff;
-    border-radius: 15px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-}
-
-.upload-section h2 {
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    margin-bottom: 32px;
 }
 
 .upload-area {
-    border: 3px dashed #ddd;
-    border-radius: 10px;
-    padding: 3rem 2rem;
+    background: var(--color-surface);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 48px 24px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s;
-    background: #fafafa;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
 }
 
 .upload-area:hover,
 .upload-area.dragover {
-    border-color: #667eea;
-    background: #f0f4ff;
+    border-color: var(--color-primary);
+    background: #eff6ff;
+    box-shadow: var(--shadow-md);
 }
 
-.upload-placeholder {
-    color: #999;
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
 
 .upload-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    color: var(--color-primary);
+    opacity: 0.8;
 }
 
-.hint {
-    font-size: 0.9rem;
-    color: #bbb;
-    margin-top: 0.5rem;
+.upload-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.upload-hint {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
 }
 
 .image-preview {
@@ -96,206 +179,421 @@ main {
 
 .image-preview img {
     max-width: 100%;
-    max-height: 300px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    max-height: 320px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
 }
 
 .remove-btn {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    background: #e74c3c;
+    top: -8px;
+    right: -8px;
+    background: var(--color-danger);
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: var(--shadow);
 }
 
 .remove-btn:hover {
-    background: #c0392b;
+    background: #dc2626;
+    transform: scale(1.1);
 }
 
-.identify-btn {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.identify-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-}
-
-.identify-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-
-/* Result Section */
-.result-section {
-    background: #fff;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-}
-
-.result-section h2 {
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.result-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
-    padding: 1.5rem;
-    color: #fff;
-}
-
-.result-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.metal-type {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.confidence {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
-}
-
-.result-body {
-    display: grid;
-    gap: 1rem;
-}
-
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.info-row:last-child {
-    border-bottom: none;
-}
-
-.label {
-    opacity: 0.8;
-}
-
-.reset-btn {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    background: #2c3e50;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.reset-btn:hover {
-    background: #34495e;
-}
-
-/* Loading Section */
+/* ===================================
+   加载状态
+   =================================== */
 .loading-section {
-    background: #fff;
-    border-radius: 15px;
-    padding: 3rem 2rem;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: 60px 24px;
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #667eea;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+}
+
+.spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-top-color: var(--color-primary);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 1.5rem;
+    animation: spin 1.2s linear infinite;
+}
+
+.spinner-ring:nth-child(2) {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    border-top-color: var(--color-primary-dark);
+    animation-duration: 0.9s;
+    animation-direction: reverse;
+}
+
+.spinner-ring:nth-child(3) {
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    border-top-color: var(--color-secondary);
+    animation-duration: 0.6s;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* Error Section */
+.loading-text {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+}
+
+/* ===================================
+   错误提示
+   =================================== */
 .error-section {
-    background: #fff;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 32px;
 }
 
-.error-message {
+.error-card {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    color: #e74c3c;
-    font-size: 1.1rem;
+    justify-content: center;
+    gap: 16px;
 }
 
 .error-icon {
-    font-size: 2rem;
+    color: var(--color-danger);
 }
 
-/* Footer */
-footer {
-    background: rgba(0, 0, 0, 0.2);
+.error-message {
+    color: #991b1b;
+    font-size: 1.05rem;
+}
+
+/* ===================================
+   识别结果 - 报告卡片
+   =================================== */
+.result-section {
+    margin-bottom: 32px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.report-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+/* 报告头部 */
+.report-header {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 24px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.report-thumbnail {
+    width: 160px;
+    height: 160px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.report-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.report-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+.metal-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.metal-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
     color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 8px;
+    min-width: 100px;
     text-align: center;
-    padding: 1.5rem 0;
-    margin-top: 3rem;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.8rem;
-    }
-    
-    .upload-area {
-        padding: 2rem 1rem;
-    }
-    
-    .result-header {
+.metal-badge.copper { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+.metal-badge.aluminum { background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%); }
+.metal-badge.iron { background: linear-gradient(135deg, #475569 0%, #334155 100%); }
+.metal-badge.stainless { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); color: #1e293b; }
+.metal-badge.other { background: linear-gradient(135deg, #64748b 0%, #475569 100%); }
+
+.metal-name-en {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.confidence-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.confidence-label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.confidence-bar {
+    height: 12px;
+    background: var(--color-border);
+    border-radius: 6px;
+    overflow: hidden;
+    flex: 1;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-success) 0%, #34d399 100%);
+    border-radius: 6px;
+    transition: width 0.6s ease;
+    min-width: 0;
+}
+
+.confidence-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-success);
+}
+
+/* 报告详情 */
+.report-details {
+    padding: 24px;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.detail-value {
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+/* 杂质标签 */
+.impurities-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.impurity-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.impurity-tag.none {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.reason-text {
+    color: var(--color-text);
+    line-height: 1.7;
+}
+
+/* ===================================
+   操作按钮
+   =================================== */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background: var(--color-bg);
+    border-color: var(--color-secondary);
+}
+
+/* ===================================
+   页脚
+   =================================== */
+.footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 24px 0;
+    margin-top: 40px;
+}
+
+.footer p {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+/* ===================================
+   响应式设计
+   =================================== */
+@media (max-width: 768px) {
+    .header-content {
         flex-direction: column;
-        gap: 1rem;
+        height: auto;
+        padding: 12px 0;
+        gap: 12px;
+    }
+
+    .nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .upload-area {
+        padding: 32px 16px;
+    }
+
+    .report-header {
+        grid-template-columns: 1fr;
         text-align: center;
     }
-    
-    .info-row {
+
+    .report-thumbnail {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+    }
+
+    .metal-info {
+        justify-content: center;
+    }
+
+    .detail-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .detail-label {
+        font-weight: 700;
+    }
+
+    .action-buttons {
         flex-direction: column;
-        gap: 0.3rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        padding: 24px 0;
+    }
+
+    .page-header {
+        margin-bottom: 24px;
+    }
+
+    .upload-title {
+        font-size: 1.1rem;
+    }
+
+    .metal-badge {
+        font-size: 1.25rem;
+        padding: 6px 16px;
     }
 }
