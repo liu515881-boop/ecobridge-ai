@@ -208,7 +208,7 @@ function showError(message) {
     loadingSection.style.display = 'none';
     resultSection.style.display = 'none';
     errorSection.style.display = 'block';
-    errorMessage.textContent = message;
+    errorMessage.textContent = message || t('error_message');
 }
 
 // 重新识别

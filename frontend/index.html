@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 语言切换器 -->
+    <div class="language-selector" style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
+        <select id="languageSelect" onchange="changeLanguage()" style="padding: 8px 12px; border-radius: 5px; border: 1px solid #ddd; background: white; cursor: pointer;">
+            <option value="zh">🇨🇳 中文</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="ar">🇦🇪 العربية</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="ur">🇵🇰 اردو</option>
+        </select>
+    </div>
+
     <!-- 顶部导航 -->
     <header class="header">
         <div class="container header-content">
@@ -15,9 +26,9 @@
                 <span class="logo-text">Ecobridge AI</span>
             </div>
             <nav class="nav">
-                <a href="#" class="nav-link active">识别</a>
-                <a href="#" class="nav-link">历史记录</a>
-                <a href="#" class="nav-link">关于</a>
+                <a href="#" class="nav-link active" data-i18n="nav_identify">识别</a>
+                <a href="#" class="nav-link" data-i18n="nav_history">历史记录</a>
+                <a href="#" class="nav-link" data-i18n="nav_about">关于</a>
             </nav>
         </div>
     </header>
@@ -27,8 +38,8 @@
         <div class="container">
             <!-- 页面标题 -->
             <section class="page-header">
-                <h1>金属识别</h1>
-                <p>上传废金属照片，AI 自动识别金属类型和杂质含量</p>
+                <h1 data-i18n="title_identify">金属识别</h1>
+                <p data-i18n="subtitle_identify">上传废金属照片，AI 自动识别金属类型和杂质含量</p>
             </section>
 
             <!-- 上传区域 -->
@@ -41,8 +52,8 @@
                                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
                             </svg>
                         </div>
-                        <h3 class="upload-title">点击或拖拽图片到此处</h3>
-                        <p class="upload-hint">支持 JPG、PNG 格式，最大 10MB</p>
+                        <h3 class="upload-title" data-i18n="upload_click">点击或拖拽图片到此处</h3>
+                        <p class="upload-hint" data-i18n="upload_hint">支持 JPG、PNG 格式，最大 10MB</p>
                     </div>
                     <div class="image-preview" id="imagePreview" style="display: none;">
                         <img id="previewImg" src="" alt="预览">
@@ -150,6 +161,7 @@
         </div>
     </footer>
 
+    <script src="i18n.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
